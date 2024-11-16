@@ -1,2 +1,2 @@
 # useDemo
-demo for everything
+demo for everything in golang!
