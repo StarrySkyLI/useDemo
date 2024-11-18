@@ -1,2 +1,11 @@
 Name: demo-rpc
 ListenOn: 0.0.0.0:8080
+DB:
+  DataSource: "root:123456@tcp(127.0.0.1:3306)/beyond_follow?parseTime=true&loc=Local"
+  MaxIdleConns: 10
+  MaxOpenConns: 100
+  ConnMaxLifetime: 3600
+BizRedis:
+  Host: 127.0.0.1:6379
+  Pass:
+  Type: node

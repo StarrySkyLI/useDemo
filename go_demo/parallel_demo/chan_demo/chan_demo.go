@@ -31,16 +31,23 @@ func greet(c chan string) {
 	*/
 
 }
+func greet2(roc <-chan string) {
+	for val := range roc {
+
+		fmt.Println(val)
+	}
+}
 
 func main() {
 	fmt.Println("Main Start")
 	// main 函数的第一个语句是打印 main start 到控制台。
 	channel := make(chan string)
+
 	// 在 main 函数中使用 make 函数创建一个 string 类型的通道赋值给 ‘ channel ’ 变量
 	go greet(channel)
 
 	fmt.Println("这时候greet协程读channel那部分是阻塞的，直到有值传入")
-	for i := 10; i > 0; i-- {
+	for i := 5; i > 0; i-- {
 		time.Sleep(1 * time.Second)
 		fmt.Println("main倒计时 :", i, "s")
 	}
@@ -53,11 +60,26 @@ func main() {
 	time.Sleep(1 * time.Second)
 	fmt.Println("主线程阻塞，等待greet读数据")
 	channel <- "DEMO2"
-	time.Sleep(1 * time.Second)
+
 	close(channel)
 	//不能向一个关了的channel发信息
 	//channel <- "DEMO3"
 
+	channel_2 := make(chan string, 2)
+
+	channel_2 <- "channel2"
+	channel_2 <- "channel2-1"
+	close(channel_2)
+	go greet2(channel_2)
+	//这里虽然关闭了通道，但是其实数据不仅在通道里面，数据还在缓冲区中的，我们依然可以读取到这个数据
+
+	//fatal error: all goroutines are asleep - deadlock!
+	//不能向一个关了的无缓冲channel读信息,可以读有缓冲的通道里面的信息
+
+	//channel_3 <- "channel3"
+	//close(channel_3)
+	//fmt.Println(<-channel_3)
+	time.Sleep(1 * time.Second)
 	fmt.Println("Main Stop")
 	// 然后主线程激活并且执行后面的语句，打印 main stopped
 }
