@@ -33,6 +33,7 @@ func main() {
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
+
 		}
 	})
 	defer s.Stop()
