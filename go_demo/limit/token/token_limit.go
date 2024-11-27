@@ -18,6 +18,7 @@ func main() {
 		Host: "localhost:6379",
 		Type: "node",
 	})
+	//每秒5最多10
 	limiter := limit.NewTokenLimiter(5, 10, store, "token_example-key")
 
 	if limiter.AllowCtx(ctx) {

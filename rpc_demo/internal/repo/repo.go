@@ -1,6 +1,7 @@
 package repo
 
 import (
+	"context"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gitlab.coolgame.world/go-template/base-common/orm"
 	"rpc_demo/internal/config"
@@ -10,6 +11,7 @@ type Repo struct {
 	DB       *orm.DB
 	BizRedis *redis.Redis
 	config   config.Config
+	ctx      context.Context
 }
 
 func NewRepo(c config.Config) *Repo {
@@ -29,5 +31,6 @@ func NewRepo(c config.Config) *Repo {
 		DB:       db,
 		BizRedis: rds,
 		config:   c,
+		ctx:      context.Background(),
 	}
 }

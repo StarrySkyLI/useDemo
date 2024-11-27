@@ -30,6 +30,7 @@ func NewProducer(config config.ProviderConfig) *Producer {
 
 func (p *Producer) ProduceMessage(message *KafkaMessage) error {
 	msg := kafka.Message{
+
 		Key:     message.Key,
 		Value:   message.Data,
 		Headers: message.GetHeader(),
