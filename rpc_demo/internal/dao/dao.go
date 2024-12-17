@@ -1,4 +1,4 @@
-package repo
+package dao
 
 import (
 	"context"
@@ -7,14 +7,14 @@ import (
 	"rpc_demo/internal/config"
 )
 
-type Repo struct {
+type Dao struct {
 	DB       *orm.DB
 	BizRedis *redis.Redis
 	config   config.Config
 	ctx      context.Context
 }
 
-func NewRepo(c config.Config) *Repo {
+func NewDao(c config.Config) *Dao {
 	db := orm.MustNewMysql(&orm.Config{
 		DSN:          c.DB.DataSource,
 		MaxOpenConns: c.DB.MaxOpenConns,
@@ -27,7 +27,7 @@ func NewRepo(c config.Config) *Repo {
 		Pass: c.BizRedis.Pass,
 		Type: c.BizRedis.Type,
 	})
-	return &Repo{
+	return &Dao{
 		DB:       db,
 		BizRedis: rds,
 		config:   c,

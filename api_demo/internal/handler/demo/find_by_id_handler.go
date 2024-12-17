@@ -1,24 +1,24 @@
-package handler
+package demo
 
 import (
 	"net/http"
 
-	"api_demo/internal/logic"
+	"api_demo/internal/logic/demo"
 	"api_demo/internal/svc"
 	"api_demo/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func Api_demoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func FindByIdHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.Request
+		var req types.FindByIdReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewApi_demoLogic(r.Context(), svcCtx)
-		resp, err := l.Api_demo(&req)
+		l := demo.NewFindByIdLogic(r.Context(), svcCtx)
+		resp, err := l.FindById(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

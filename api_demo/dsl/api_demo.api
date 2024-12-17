@@ -1,0 +1,49 @@
+syntax = "v1"
+
+type Request {
+    Name string `path:"name,options=you|me"`
+}
+
+type Response {
+    Message string `json:"message"`
+}
+type findByIdReq {
+    Id int64 `json:"id"`
+}
+type findByIdResp {
+    id int64 `json:"id"`
+    name string `json:"name"`
+    code string `json:"code"`
+    data string `json:"data"`
+    create_time string `json:"create_time"`
+    update_time string `json:"update_time"`
+}
+type GameInfo {
+    id int64 `json:"id"`
+    name string `json:"name"`
+    code string `json:"code"`
+    data string `json:"data"`
+    create_time string `json:"create_time"`
+    update_time string `json:"update_time"`
+}
+type listReq {
+    page int32 `json:"page"`
+    page_size int32 `json:"page_size"`
+}
+type listResp {
+    List []GameInfo `json:"list"`
+}
+@server(
+    group: demo
+    prefix:     /v1/demo
+)
+service api_demo-api {
+    @handler Api_demoHandler
+    get /from/:name (Request) returns (Response)
+
+    @handler findById
+    post /find_id (findByIdReq) returns (findByIdResp)
+
+    @handler list
+    post /list (listReq) returns (listResp)
+}

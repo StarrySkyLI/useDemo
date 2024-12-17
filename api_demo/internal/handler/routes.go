@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	demo "api_demo/internal/handler/demo"
 	"api_demo/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -15,8 +16,19 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodGet,
 				Path:    "/from/:name",
-				Handler: Api_demoHandler(serverCtx),
+				Handler: demo.Api_demoHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/find_id",
+				Handler: demo.FindByIdHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: demo.ListHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/v1/demo"),
 	)
 }

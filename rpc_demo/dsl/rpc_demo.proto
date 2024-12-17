@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package rpc;
+option go_package = "./rpc";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+message GameInfoReq{
+  int64 id =1;
+}
+message GameInfo{
+  int64 id=1;
+  string name=2;
+  string code=3;
+  string data=4;
+  string create_time=5;
+  string update_time=6;
+}
+message GameInfoRep{
+  GameInfo info=1;
+}
+message GameListReq{
+  int32 page =1;
+  int32 pageSize=2;
+}
+message GameListRep{
+  repeated GameInfo list=1;
+}
+service Rpc_demo {
+  rpc Ping(Request) returns(Response);
+  rpc FindOne (GameInfoReq) returns (GameInfoRep);
+  rpc GameList (GameListReq) returns (GameListRep);
+}

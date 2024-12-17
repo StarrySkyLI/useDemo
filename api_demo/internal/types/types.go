@@ -8,3 +8,34 @@ type Request struct {
 type Response struct {
 	Message string `json:"message"`
 }
+
+type FindByIdReq struct {
+	Id int64 `json:"id"`
+}
+
+type FindByIdResp struct {
+	Id          int64  `json:"id"`
+	Name        string `json:"name"`
+	Code        string `json:"code"`
+	Data        string `json:"data"`
+	Create_time string `json:"create_time"`
+	Update_time string `json:"update_time"`
+}
+
+type GameInfo struct {
+	Id          int64  `json:"id"`
+	Name        string `json:"name"`
+	Code        string `json:"code"`
+	Data        string `json:"data"`
+	Create_time string `json:"create_time"`
+	Update_time string `json:"update_time"`
+}
+
+type ListReq struct {
+	Page      int32 `json:"page"`
+	Page_size int32 `json:"page_size"`
+}
+
+type ListResp struct {
+	List []GameInfo `json:"list"`
+}

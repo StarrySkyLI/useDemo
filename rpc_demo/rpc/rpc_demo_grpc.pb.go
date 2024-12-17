@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.4
-// source: rpc_demo.proto
+// source: dsl/rpc_demo.proto
 
-package rpc_demo
+package rpc
 
 import (
 	context "context"
@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	RpcDemo_Ping_FullMethodName = "/rpc_demo.Rpc_demo/Ping"
+	RpcDemo_Ping_FullMethodName     = "/rpc.Rpc_demo/Ping"
+	RpcDemo_FindOne_FullMethodName  = "/rpc.Rpc_demo/FindOne"
+	RpcDemo_GameList_FullMethodName = "/rpc.Rpc_demo/GameList"
 )
 
 // RpcDemoClient is the client API for RpcDemo service.
@@ -27,6 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RpcDemoClient interface {
 	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	FindOne(ctx context.Context, in *GameInfoReq, opts ...grpc.CallOption) (*GameInfoRep, error)
+	GameList(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (*GameListRep, error)
 }
 
 type rpcDemoClient struct {
@@ -46,11 +50,31 @@ func (c *rpcDemoClient) Ping(ctx context.Context, in *Request, opts ...grpc.Call
 	return out, nil
 }
 
+func (c *rpcDemoClient) FindOne(ctx context.Context, in *GameInfoReq, opts ...grpc.CallOption) (*GameInfoRep, error) {
+	out := new(GameInfoRep)
+	err := c.cc.Invoke(ctx, RpcDemo_FindOne_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rpcDemoClient) GameList(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (*GameListRep, error) {
+	out := new(GameListRep)
+	err := c.cc.Invoke(ctx, RpcDemo_GameList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RpcDemoServer is the server API for RpcDemo service.
 // All implementations must embed UnimplementedRpcDemoServer
 // for forward compatibility
 type RpcDemoServer interface {
 	Ping(context.Context, *Request) (*Response, error)
+	FindOne(context.Context, *GameInfoReq) (*GameInfoRep, error)
+	GameList(context.Context, *GameListReq) (*GameListRep, error)
 	mustEmbedUnimplementedRpcDemoServer()
 }
 
@@ -60,6 +84,12 @@ type UnimplementedRpcDemoServer struct {
 
 func (UnimplementedRpcDemoServer) Ping(context.Context, *Request) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (UnimplementedRpcDemoServer) FindOne(context.Context, *GameInfoReq) (*GameInfoRep, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindOne not implemented")
+}
+func (UnimplementedRpcDemoServer) GameList(context.Context, *GameListReq) (*GameListRep, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GameList not implemented")
 }
 func (UnimplementedRpcDemoServer) mustEmbedUnimplementedRpcDemoServer() {}
 
@@ -92,18 +122,62 @@ func _RpcDemo_Ping_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RpcDemo_FindOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GameInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RpcDemoServer).FindOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RpcDemo_FindOne_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RpcDemoServer).FindOne(ctx, req.(*GameInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RpcDemo_GameList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GameListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RpcDemoServer).GameList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RpcDemo_GameList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RpcDemoServer).GameList(ctx, req.(*GameListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RpcDemo_ServiceDesc is the grpc.ServiceDesc for RpcDemo service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RpcDemo_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "rpc_demo.Rpc_demo",
+	ServiceName: "rpc.Rpc_demo",
 	HandlerType: (*RpcDemoServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Ping",
 			Handler:    _RpcDemo_Ping_Handler,
 		},
+		{
+			MethodName: "FindOne",
+			Handler:    _RpcDemo_FindOne_Handler,
+		},
+		{
+			MethodName: "GameList",
+			Handler:    _RpcDemo_GameList_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc_demo.proto",
+	Metadata: "dsl/rpc_demo.proto",
 }

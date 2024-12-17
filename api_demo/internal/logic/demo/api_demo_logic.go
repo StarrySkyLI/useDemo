@@ -1,10 +1,7 @@
-package logic
+package demo
 
 import (
 	"context"
-	"fmt"
-	"github.com/zeromicro/go-zero/core/logc"
-	"rpc_demo/rpc_demo"
 
 	"api_demo/internal/svc"
 	"api_demo/internal/types"
@@ -27,19 +24,7 @@ func NewApi_demoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Api_demo
 }
 
 func (l *Api_demoLogic) Api_demo(req *types.Request) (resp *types.Response, err error) {
+	// todo: add your logic here and delete this line
 
-	fmt.Println(l.ctx)
-	ping, err := l.svcCtx.DemoRPC.Ping(l.ctx, &rpc_demo.Request{
-		Ping: "ping",
-	})
-	if err != nil {
-		return nil, err
-	}
-	logc.Info(l.ctx, "logc")
-
-	fmt.Println("-----------------", ping)
-
-	return &types.Response{
-		Message: ping.Pong,
-	}, nil
+	return
 }
