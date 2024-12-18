@@ -1,0 +1,258 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "type title here",
+    "description": "type desc here",
+    "version": "type version here"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/demo/find_id": {
+      "post": {
+        "operationId": "findById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/findByIdResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/findByIdReq"
+            }
+          }
+        ],
+        "tags": [
+          "demo"
+        ]
+      }
+    },
+    "/v1/demo/from/{name}": {
+      "get": {
+        "operationId": "Api_demoHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "demo"
+        ]
+      }
+    },
+    "/v1/demo/list": {
+      "post": {
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/listResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/listReq"
+            }
+          }
+        ],
+        "tags": [
+          "demo"
+        ]
+      }
+    },
+    "/v1/demo/list_export": {
+      "post": {
+        "operationId": "list_export",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/listReq"
+            }
+          }
+        ],
+        "tags": [
+          "demo"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "GameInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        },
+        "create_time": {
+          "type": "string"
+        },
+        "update_time": {
+          "type": "string"
+        }
+      },
+      "title": "GameInfo",
+      "required": [
+        "id",
+        "name",
+        "code",
+        "data",
+        "create_time",
+        "update_time"
+      ]
+    },
+    "Request": {
+      "type": "object",
+      "title": "Request"
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "Response",
+      "required": [
+        "message"
+      ]
+    },
+    "findByIdReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "findByIdReq",
+      "required": [
+        "id"
+      ]
+    },
+    "findByIdResp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        },
+        "create_time": {
+          "type": "string"
+        },
+        "update_time": {
+          "type": "string"
+        }
+      },
+      "title": "findByIdResp",
+      "required": [
+        "id",
+        "name",
+        "code",
+        "data",
+        "create_time",
+        "update_time"
+      ]
+    },
+    "listReq": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "listReq",
+      "required": [
+        "page",
+        "page_size"
+      ]
+    },
+    "listResp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GameInfo"
+          }
+        }
+      },
+      "title": "listResp",
+      "required": [
+        "list"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
