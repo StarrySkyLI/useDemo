@@ -2,6 +2,7 @@ package demo
 
 import (
 	"context"
+	"rpc_demo/rpc"
 
 	"api_demo/internal/svc"
 	"api_demo/internal/types"
@@ -24,7 +25,20 @@ func NewFindByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FindById
 }
 
 func (l *FindByIdLogic) FindById(req *types.FindByIdReq) (resp *types.FindByIdResp, err error) {
-	// todo: add your logic here and delete this line
+	one, err := l.svcCtx.DemoRPC.FindOne(l.ctx, &rpc.GameInfoReq{
+		Id: req.Id,
+	})
+	if err != nil {
+		return nil, err
 
-	return
+	}
+
+	return &types.FindByIdResp{
+		Id:          one.Info.Id,
+		Name:        one.Info.Name,
+		Code:        one.Info.Code,
+		Data:        one.Info.Data,
+		Create_time: one.Info.CreateTime,
+		Update_time: one.Info.UpdateTime,
+	}, nil
 }

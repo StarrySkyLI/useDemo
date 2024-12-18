@@ -28,6 +28,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/list",
 				Handler: demo.ListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list_export",
+				Handler: demo.List_exportHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/v1/demo"),
 	)

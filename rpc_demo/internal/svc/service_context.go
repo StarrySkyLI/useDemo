@@ -7,12 +7,12 @@ import (
 
 type ServiceContext struct {
 	Config config.Config
-	dao    *dao.Dao
+	Dao    *dao.Dao
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
-		dao:    dao.NewDao(c),
+		Dao:    dao.NewDao(c),
 	}
 }

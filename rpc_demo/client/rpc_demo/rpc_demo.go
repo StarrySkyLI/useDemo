@@ -25,6 +25,7 @@ type (
 		Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 		FindOne(ctx context.Context, in *GameInfoReq, opts ...grpc.CallOption) (*GameInfoRep, error)
 		GameList(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (*GameListRep, error)
+		GameListExport(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (rpc.RpcDemo_GameListExportClient, error)
 	}
 
 	defaultRpcDemo struct {
@@ -51,4 +52,9 @@ func (m *defaultRpcDemo) FindOne(ctx context.Context, in *GameInfoReq, opts ...g
 func (m *defaultRpcDemo) GameList(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (*GameListRep, error) {
 	client := rpc.NewRpcDemoClient(m.cli.Conn())
 	return client.GameList(ctx, in, opts...)
+}
+
+func (m *defaultRpcDemo) GameListExport(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (rpc.RpcDemo_GameListExportClient, error) {
+	client := rpc.NewRpcDemoClient(m.cli.Conn())
+	return client.GameListExport(ctx, in, opts...)
 }

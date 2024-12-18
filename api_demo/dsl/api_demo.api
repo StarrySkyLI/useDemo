@@ -46,4 +46,7 @@ service api_demo-api {
 
     @handler list
     post /list (listReq) returns (listResp)
+
+    @handler list_export
+    post /list_export (listReq)
 }

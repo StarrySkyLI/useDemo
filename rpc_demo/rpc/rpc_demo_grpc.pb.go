@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	RpcDemo_Ping_FullMethodName     = "/rpc.Rpc_demo/Ping"
-	RpcDemo_FindOne_FullMethodName  = "/rpc.Rpc_demo/FindOne"
-	RpcDemo_GameList_FullMethodName = "/rpc.Rpc_demo/GameList"
+	RpcDemo_Ping_FullMethodName           = "/rpc.Rpc_demo/Ping"
+	RpcDemo_FindOne_FullMethodName        = "/rpc.Rpc_demo/FindOne"
+	RpcDemo_GameList_FullMethodName       = "/rpc.Rpc_demo/GameList"
+	RpcDemo_GameListExport_FullMethodName = "/rpc.Rpc_demo/GameListExport"
 )
 
 // RpcDemoClient is the client API for RpcDemo service.
@@ -31,6 +32,7 @@ type RpcDemoClient interface {
 	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 	FindOne(ctx context.Context, in *GameInfoReq, opts ...grpc.CallOption) (*GameInfoRep, error)
 	GameList(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (*GameListRep, error)
+	GameListExport(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (RpcDemo_GameListExportClient, error)
 }
 
 type rpcDemoClient struct {
@@ -68,6 +70,38 @@ func (c *rpcDemoClient) GameList(ctx context.Context, in *GameListReq, opts ...g
 	return out, nil
 }
 
+func (c *rpcDemoClient) GameListExport(ctx context.Context, in *GameListReq, opts ...grpc.CallOption) (RpcDemo_GameListExportClient, error) {
+	stream, err := c.cc.NewStream(ctx, &RpcDemo_ServiceDesc.Streams[0], RpcDemo_GameListExport_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &rpcDemoGameListExportClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type RpcDemo_GameListExportClient interface {
+	Recv() (*GameInfo, error)
+	grpc.ClientStream
+}
+
+type rpcDemoGameListExportClient struct {
+	grpc.ClientStream
+}
+
+func (x *rpcDemoGameListExportClient) Recv() (*GameInfo, error) {
+	m := new(GameInfo)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // RpcDemoServer is the server API for RpcDemo service.
 // All implementations must embed UnimplementedRpcDemoServer
 // for forward compatibility
@@ -75,6 +109,7 @@ type RpcDemoServer interface {
 	Ping(context.Context, *Request) (*Response, error)
 	FindOne(context.Context, *GameInfoReq) (*GameInfoRep, error)
 	GameList(context.Context, *GameListReq) (*GameListRep, error)
+	GameListExport(*GameListReq, RpcDemo_GameListExportServer) error
 	mustEmbedUnimplementedRpcDemoServer()
 }
 
@@ -90,6 +125,9 @@ func (UnimplementedRpcDemoServer) FindOne(context.Context, *GameInfoReq) (*GameI
 }
 func (UnimplementedRpcDemoServer) GameList(context.Context, *GameListReq) (*GameListRep, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GameList not implemented")
+}
+func (UnimplementedRpcDemoServer) GameListExport(*GameListReq, RpcDemo_GameListExportServer) error {
+	return status.Errorf(codes.Unimplemented, "method GameListExport not implemented")
 }
 func (UnimplementedRpcDemoServer) mustEmbedUnimplementedRpcDemoServer() {}
 
@@ -158,6 +196,27 @@ func _RpcDemo_GameList_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RpcDemo_GameListExport_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GameListReq)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(RpcDemoServer).GameListExport(m, &rpcDemoGameListExportServer{stream})
+}
+
+type RpcDemo_GameListExportServer interface {
+	Send(*GameInfo) error
+	grpc.ServerStream
+}
+
+type rpcDemoGameListExportServer struct {
+	grpc.ServerStream
+}
+
+func (x *rpcDemoGameListExportServer) Send(m *GameInfo) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // RpcDemo_ServiceDesc is the grpc.ServiceDesc for RpcDemo service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -178,6 +237,12 @@ var RpcDemo_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _RpcDemo_GameList_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GameListExport",
+			Handler:       _RpcDemo_GameListExport_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "dsl/rpc_demo.proto",
 }

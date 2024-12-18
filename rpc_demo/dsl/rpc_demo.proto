@@ -34,5 +34,6 @@ message GameListRep{
 service Rpc_demo {
   rpc Ping(Request) returns(Response);
   rpc FindOne (GameInfoReq) returns (GameInfoRep);
-  rpc GameList (GameListReq) returns (GameListRep);
+  rpc GameList (GameListReq) returns ( GameListRep);
+  rpc GameListExport (GameListReq) returns (stream GameInfo);
 }

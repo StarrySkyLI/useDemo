@@ -36,3 +36,8 @@ func (s *RpcDemoServer) GameList(ctx context.Context, in *rpc.GameListReq) (*rpc
 	l := rpcdemologic.NewGameListLogic(ctx, s.svcCtx)
 	return l.GameList(in)
 }
+
+func (s *RpcDemoServer) GameListExport(in *rpc.GameListReq, stream rpc.RpcDemo_GameListExportServer) error {
+	l := rpcdemologic.NewGameListExportLogic(stream.Context(), s.svcCtx)
+	return l.GameListExport(in, stream)
+}
