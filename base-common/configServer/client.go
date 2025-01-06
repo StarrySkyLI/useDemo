@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
+	"base-common/pkg/cache"
 	"github.com/zeromicro/go-zero/core/logc"
-	"gitlab.coolgame.world/go-template/base-common/pkg/cache"
 	"go.etcd.io/etcd/api/v3/mvccpb"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )

@@ -1,13 +1,13 @@
 package core
 
 import (
+	"base-common/esv8"
 	"context"
 	"encoding/json"
 	"errors"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/core/get"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/core/search"
-	"gitlab.coolgame.world/go-template/base-common/esv8"
 	"io"
 	"net/http"
 )

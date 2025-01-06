@@ -3,8 +3,8 @@ package kafkaMQ
 import (
 	"strings"
 
+	"base-common/consts"
 	"github.com/segmentio/kafka-go"
-	"gitlab.coolgame.world/go-template/base-common/consts"
 )
 
 type Handler string

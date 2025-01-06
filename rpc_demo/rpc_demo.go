@@ -1,10 +1,14 @@
 package main
 
 import (
+	"base-common/app"
+	"base-common/consul"
+	"base-common/middleware"
+	"base-common/xxlJob"
+	"context"
 	"flag"
 	"fmt"
-	"gitlab.coolgame.world/go-template/base-common/app"
-	"gitlab.coolgame.world/go-template/base-common/middleware"
+	"rpc_demo/internal/jobs/test"
 	"rpc_demo/rpc"
 
 	"rpc_demo/internal/config"
@@ -36,7 +40,16 @@ func main() {
 	})
 	s.AddUnaryInterceptors(middleware.NewRpcAuthMiddleware().Handle())
 	defer s.Stop()
-
+	// cron job
+	jobCli := xxlJob.NewClient(context.Background(), c.XxlJob).Register(
+		&test.TestHandler{},
+	)
+	jobCli.MustStart()
+	// 服务注册
+	err := consul.Register(c.Consul, fmt.Sprintf("%s:%d", c.ServiceConf.Prometheus.Host, c.ServiceConf.Prometheus.Port))
+	if err != nil {
+		fmt.Printf("register consul error: %v\n", err)
+	}
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	s.Start()
 }

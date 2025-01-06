@@ -1,14 +1,13 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"gitlab.coolgame.world/go-template/base-common/app"
-	"gitlab.coolgame.world/go-template/base-common/middleware"
-
 	"api_demo/internal/config"
 	"api_demo/internal/handler"
 	"api_demo/internal/svc"
+	"base-common/app"
+	"base-common/consul"
+	"flag"
+	"fmt"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
@@ -28,7 +27,12 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
-	server.Use(middleware.NewApiHeaderMiddleware().Handle)
+	//server.Use(middleware.NewApiHeaderMiddleware().Handle)
+	// 服务注册
+	err := consul.Register(c.Consul, fmt.Sprintf("%s:%d", c.ServiceConf.Prometheus.Host, c.ServiceConf.Prometheus.Port))
+	if err != nil {
+		fmt.Printf("register consul error: %v\n", err)
+	}
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }

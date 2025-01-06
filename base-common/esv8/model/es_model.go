@@ -1,14 +1,14 @@
 package model
 
 import (
+	"base-common/esv8"
+	"base-common/esv8/core"
+	"base-common/uuid"
 	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
-	"gitlab.coolgame.world/go-template/base-common/esv8"
-	"gitlab.coolgame.world/go-template/base-common/esv8/core"
-	"gitlab.coolgame.world/go-template/base-common/uuid"
 	"strings"
 )
 

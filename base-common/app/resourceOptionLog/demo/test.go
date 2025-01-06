@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"gitlab.coolgame.world/go-template/base-common/app/resourceOptionLog"
-	"gitlab.coolgame.world/go-template/base-common/consts"
+	"base-common/app/resourceOptionLog"
+	"base-common/consts"
 )
 
 func main() {

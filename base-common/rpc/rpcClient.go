@@ -3,8 +3,8 @@ package rpc
 import (
 	"fmt"
 
+	"base-common/rpc/interceptors"
 	"github.com/zeromicro/go-zero/zrpc"
-	"gitlab.coolgame.world/go-template/base-common/rpc/interceptors"
 )
 
 func GenRpcTarget(hosts string) string {

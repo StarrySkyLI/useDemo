@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 
-	kafkaMQ "gitlab.coolgame.world/go-template/base-common/amqp/kafka"
-	"gitlab.coolgame.world/go-template/base-common/amqp/kafka/config"
+	kafkaMQ "base-common/amqp/kafka"
+	"base-common/amqp/kafka/config"
 )
 
 const (

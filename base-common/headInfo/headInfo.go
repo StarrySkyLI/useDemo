@@ -1,8 +1,8 @@
 package headInfo
 
 import (
+	"base-common/consts"
 	"context"
-	"gitlab.coolgame.world/go-template/base-common/consts"
 	"strconv"
 	"strings"
 

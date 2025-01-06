@@ -5,6 +5,10 @@ type Request struct {
 	Name string `path:"name,options=you|me"`
 }
 
+type Requesti struct {
+	UserId int32 `json:"userId"`
+}
+
 type Response struct {
 	Message string `json:"message"`
 }

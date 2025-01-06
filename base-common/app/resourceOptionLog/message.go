@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"gitlab.coolgame.world/go-template/base-common/consts"
-	"gitlab.coolgame.world/go-template/base-common/headInfo"
+	"base-common/consts"
+	"base-common/headInfo"
 )
 
 type OptionType string

@@ -1,19 +1,19 @@
 package result
 
 import (
+	"base-common/arLanguage"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"gitlab.coolgame.world/go-template/base-common/arLanguage"
 	"net/http"
 
+	"base-common/headInfo"
+	"base-common/pkg/aesGCM"
+	"base-common/pkg/xcode"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/trace"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"gitlab.coolgame.world/go-template/base-common/headInfo"
-	"gitlab.coolgame.world/go-template/base-common/pkg/aesGCM"
-	"gitlab.coolgame.world/go-template/base-common/pkg/xcode"
 )
 
 func HttpSuccessResult(ctx context.Context, w http.ResponseWriter, resp interface{}) {

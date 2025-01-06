@@ -3,7 +3,7 @@ package interceptors
 import (
 	"context"
 
-	"gitlab.coolgame.world/go-template/base-common/xcode"
+	"base-common/xcode"
 	"google.golang.org/grpc"
 )
 

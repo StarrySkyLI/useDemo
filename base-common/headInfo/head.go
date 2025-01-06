@@ -1,11 +1,11 @@
 package headInfo
 
 import (
+	"base-common/consts"
 	"context"
 	"encoding/json"
 	"errors"
 	"github.com/zeromicro/go-zero/core/logc"
-	"gitlab.coolgame.world/go-template/base-common/consts"
 	"net"
 	"net/http"
 	"strings"

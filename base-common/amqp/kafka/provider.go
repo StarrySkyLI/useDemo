@@ -5,7 +5,7 @@ import (
 	"github.com/segmentio/kafka-go"
 	"time"
 
-	"gitlab.coolgame.world/go-template/base-common/amqp/kafka/config"
+	"base-common/amqp/kafka/config"
 )
 
 type Producer struct {

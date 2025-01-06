@@ -1,11 +1,11 @@
 package middleware
 
 import (
+	"base-common/headInfo"
+	"base-common/result"
+	"base-common/rpc"
 	"errors"
 	"github.com/zeromicro/go-zero/core/logc"
-	"gitlab.coolgame.world/go-template/base-common/headInfo"
-	"gitlab.coolgame.world/go-template/base-common/result"
-	"gitlab.coolgame.world/go-template/base-common/rpc"
 	"net/http"
 	"runtime/debug"
 	"strings"

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"gitlab.coolgame.world/go-template/base-common/configServer"
+	"base-common/configServer"
 )
 
 func main() {

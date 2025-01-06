@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"gitlab.coolgame.world/go-template/base-common/pkg/xcode"
+	"base-common/pkg/xcode"
 
+	"base-common/rpc"
 	"github.com/zeromicro/go-zero/core/logc"
-	"gitlab.coolgame.world/go-template/base-common/rpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )

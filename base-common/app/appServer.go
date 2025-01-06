@@ -1,11 +1,11 @@
 package app
 
 import (
+	"base-common/app/dbM"
+	"base-common/pkg/logs"
+	"base-common/xxlJob"
 	"github.com/sirupsen/logrus"
 	"github.com/zeromicro/go-zero/core/logx"
-	"gitlab.coolgame.world/go-template/base-common/app/dbM"
-	"gitlab.coolgame.world/go-template/base-common/pkg/logs"
-	"gitlab.coolgame.world/go-template/base-common/xxlJob"
 )
 
 func init() {

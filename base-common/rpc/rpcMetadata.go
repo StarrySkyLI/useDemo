@@ -1,10 +1,10 @@
 package rpc
 
 import (
+	"base-common/consts"
+	"base-common/headInfo"
 	"context"
 	"errors"
-	"gitlab.coolgame.world/go-template/base-common/consts"
-	"gitlab.coolgame.world/go-template/base-common/headInfo"
 	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"

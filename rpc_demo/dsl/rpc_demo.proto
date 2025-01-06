@@ -36,4 +36,5 @@ service Rpc_demo {
   rpc FindOne (GameInfoReq) returns (GameInfoRep);
   rpc GameList (GameListReq) returns ( GameListRep);
   rpc GameListExport (GameListReq) returns (stream GameInfo);
+
 }

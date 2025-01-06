@@ -1,9 +1,10 @@
 package dao
 
 import (
+	"base-common/middleware"
+	"base-common/orm"
 	"context"
 	"github.com/zeromicro/go-zero/core/stores/redis"
-	"gitlab.coolgame.world/go-template/base-common/orm"
 	"rpc_demo/internal/config"
 )
 
@@ -26,7 +27,7 @@ func NewDao(c config.Config) *Dao {
 		Host: c.BizRedis.Host,
 		Pass: c.BizRedis.Pass,
 		Type: c.BizRedis.Type,
-	})
+	}, redis.WithHook(middleware.NewBigKeyHook(100)))
 	return &Dao{
 		DB:       db,
 		BizRedis: rds,

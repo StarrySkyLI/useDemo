@@ -8,3 +8,6 @@ swg:
 up:
 	go get gitlab.leadsea.cn/go-template/rpc-client
 	go get gitlab.leadsea.cn/go-template/base-common
+
+run:
+	go run api_demo.go

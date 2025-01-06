@@ -7,8 +7,8 @@ import (
 	"io"
 	"net/http"
 
-	"gitlab.coolgame.world/go-template/base-common/pkg/aesGCM"
-	"gitlab.coolgame.world/go-template/base-common/result"
+	"base-common/pkg/aesGCM"
+	"base-common/result"
 )
 
 const (

@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"base-common/pkg/xcode"
 	"github.com/zeromicro/go-zero/core/trace"
-	"gitlab.coolgame.world/go-template/base-common/pkg/xcode"
 	"go.opentelemetry.io/otel"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"

@@ -1,8 +1,8 @@
 package test
 
 import (
+	"base-common/arLanguage"
 	"fmt"
-	"gitlab.coolgame.world/go-template/base-common/arLanguage"
 	"testing"
 )
 

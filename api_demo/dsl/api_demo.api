@@ -3,6 +3,9 @@ syntax = "v1"
 type Request {
     Name string `path:"name,options=you|me"`
 }
+type Requesti {
+   UserId int32 `json:"userId"`
+}
 
 type Response {
     Message string `json:"message"`
@@ -49,4 +52,6 @@ service api_demo-api {
 
     @handler list_export
     post /list_export (listReq)
+
+
 }

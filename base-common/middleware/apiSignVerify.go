@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"gitlab.coolgame.world/go-template/base-common/pkg/signr"
-	"gitlab.coolgame.world/go-template/base-common/result"
+	"base-common/pkg/signr"
+	"base-common/result"
 )
 
 const (

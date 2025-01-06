@@ -1,12 +1,12 @@
 package middleware
 
 import (
-	"gitlab.coolgame.world/go-template/base-common/consts"
-	"gitlab.coolgame.world/go-template/base-common/pkg/xcode"
+	"base-common/consts"
+	"base-common/pkg/xcode"
 	"net/http"
 	"strconv"
 
-	"gitlab.coolgame.world/go-template/base-common/headInfo"
+	"base-common/headInfo"
 	"google.golang.org/grpc/metadata"
 )
 

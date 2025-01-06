@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"gitlab.coolgame.world/go-template/base-common/rpc"
+	"base-common/rpc"
 	"gorm.io/gorm"
 )
 

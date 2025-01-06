@@ -3,8 +3,8 @@ package kafkaMQ
 import (
 	"context"
 
+	"base-common/amqp/kafka/config"
 	"github.com/segmentio/kafka-go"
-	"gitlab.coolgame.world/go-template/base-common/amqp/kafka/config"
 )
 
 type ConsumerHandler func(message KafkaMessage) error

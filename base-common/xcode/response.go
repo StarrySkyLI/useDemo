@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	xcode2 "gitlab.coolgame.world/go-template/base-common/pkg/xcode"
+	xcode2 "base-common/pkg/xcode"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"gitlab.coolgame.world/go-template/base-common/result"
+	"base-common/result"
 	"net/http"
 )
 

@@ -1,4 +1,4 @@
-module gitlab.coolgame.world/go-template/base-common
+module base-common
 
 go 1.22
 

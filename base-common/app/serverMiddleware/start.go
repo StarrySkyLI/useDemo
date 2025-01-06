@@ -1,8 +1,8 @@
 package serverMiddleware
 
 import (
+	"base-common/middleware"
 	"github.com/zeromicro/go-zero/rest"
-	"gitlab.coolgame.world/go-template/base-common/middleware"
 )
 
 type SMOption func(s *ServerMiddleware)

@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"time"
 
+	"base-common/consts"
+	"base-common/headInfo"
+	"base-common/pkg/xcode"
+	"base-common/result"
 	"github.com/patrickmn/go-cache"
-	"gitlab.coolgame.world/go-template/base-common/consts"
-	"gitlab.coolgame.world/go-template/base-common/headInfo"
-	"gitlab.coolgame.world/go-template/base-common/pkg/xcode"
-	"gitlab.coolgame.world/go-template/base-common/result"
 	"google.golang.org/grpc/metadata"
 )
 
