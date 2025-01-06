@@ -1,9 +1,9 @@
 package demo
 
 import (
+	"base-common/excel"
+	"base-common/result"
 	"errors"
-	"gitlab.coolgame.world/go-template/base-common/excel"
-	"gitlab.coolgame.world/go-template/base-common/result"
 	"io"
 	"net/http"
 	"rpc_demo/rpc"
