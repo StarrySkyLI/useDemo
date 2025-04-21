@@ -48,7 +48,9 @@ clean:
 	@echo "Cleaning up..."
 	# 可以根据需要添加清理操作
 abp:
-	ab -p POST.json -T application/json -c 3 -n 2000000 "http://127.0.0.1:8888/v1/demo/find_id"
+	ab -p POST.json -T application/json -c 3 -n 20 "http://127.0.0.1:8888/v1/demo/find_id"
 
 abg:
-	ab -c 3 -n 2000000 "http://127.0.0.1:8888/v1/demo/breaker_test?userId=1"
+	ab -c 3 -n 20 "http://127.0.0.1:8888/v1/demo/breaker_test?userId=1"
+
+	ab -c 3 -n 2000 "http://43.135.42.236:8080/test/test"

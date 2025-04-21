@@ -1,8 +1,8 @@
 package config
 
 import (
+	"base-common/consul"
 	"github.com/zeromicro/go-zero/rest"
-	"gitlab.coolgame.world/go-template/base-common/consul"
 )
 
 type Config struct {

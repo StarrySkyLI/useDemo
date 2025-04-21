@@ -2,9 +2,9 @@ package svc
 
 import (
 	"api_demo/internal/config"
+	"base-common/rpc"
+	"base-common/rpc/interceptors"
 	"github.com/zeromicro/go-zero/zrpc"
-	"gitlab.coolgame.world/go-template/base-common/rpc"
-	"gitlab.coolgame.world/go-template/base-common/rpc/interceptors"
 	"rpc_demo/client/rpc_demo"
 )
 
