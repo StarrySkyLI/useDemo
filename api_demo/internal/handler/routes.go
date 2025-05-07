@@ -34,6 +34,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: demo.List_exportHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/v1/demo"),
+		rest.WithPrefix("/v1/mutex_demo"),
 	)
 }

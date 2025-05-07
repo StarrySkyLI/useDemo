@@ -12,3 +12,8 @@ func TestSafeMap(t *testing.T) {
 	fmt.Println(safeMap.Get("a"))
 
 }
+func TestShardMap(t *testing.T) {
+	shardMap := NewShardMap()
+	shardMap.Store("a", "1")
+	fmt.Println(shardMap.Load("a"))
+}

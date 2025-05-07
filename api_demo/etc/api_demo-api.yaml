@@ -9,12 +9,12 @@ Prometheus:
   Path: /metrics
 #  sum(rate(http_server_requests_duration_ms_count{env="$env",service_group="$service_group",service_name="$service_name"}[2m])) by (path)
 Telemetry:
-  Name: demo-api
+  Name: mutex_demo-api
   Endpoint: http://127.0.0.1:14268/api/traces
 Consul:
   Host: 127.0.0.1:8500
-  Key: demo-api
+  Key: mutex_demo-api
   Meta:
     env: test
-    service_group: demo
-    service_name: demo-api
+    service_group: mutex_demo
+    service_name: mutex_demo-api

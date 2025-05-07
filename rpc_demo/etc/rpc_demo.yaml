@@ -1,4 +1,4 @@
-Name: demo-rpc
+Name: mutex_demo-rpc
 ListenOn: 0.0.0.0:8080
 DB:
   DataSource: "root:123456@tcp(127.0.0.1:3306)/test?parseTime=true&loc=Local"
@@ -15,13 +15,13 @@ Prometheus:
   Path: /metrics
 Consul:
   Host: 127.0.0.1:8500
-  Key: demo-rpc
+  Key: mutex_demo-rpc
   Meta:
     env: test
-    service_group: demo
-    service_name: demo-rpc
+    service_group: mutex_demo
+    service_name: mutex_demo-rpc
 Telemetry:
-  Name: demo-rpc
+  Name: mutex_demo-rpc
   Endpoint: http://127.0.0.1:14268/api/traces
 XxlJob:
   Address: "https://xxl-job.xx.xx/xxl-job-admin"
