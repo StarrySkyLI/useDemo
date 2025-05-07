@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"base-common/app/resourceOptionLog"
-	"base-common/consts"
+	"useDemo/base-common/app/resourceOptionLog"
+	"useDemo/base-common/consts"
 )
 
 func main() {

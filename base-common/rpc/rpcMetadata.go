@@ -1,11 +1,11 @@
 package rpc
 
 import (
-	"base-common/consts"
-	"base-common/headInfo"
 	"context"
 	"errors"
 	"strconv"
+	"useDemo/base-common/consts"
+	"useDemo/base-common/headInfo"
 
 	"github.com/zeromicro/go-zero/core/logx"
 	"google.golang.org/grpc/metadata"
@@ -25,7 +25,7 @@ type AppRpcMetadata struct {
 	Token string `json:"token"`
 
 	// 唯一ID
-	//TranceId string `json:"trance"`
+	// TranceId string `json:"trance"`
 
 	TranceIdRole string `json:"trace_id_role"`
 
@@ -62,7 +62,7 @@ func newOutgoingContextRpc(ctx context.Context, data *AppRpcMetadata) context.Co
 		consts.TokenUid, strconv.FormatInt(data.TokenUid, 10),
 		consts.ClientIp, data.ClientIp,
 		consts.DeviceId, data.DeviceId,
-		//consts.TranceId, data.TranceId,
+		// consts.TranceId, data.TranceId,
 		consts.UserAgent, data.UserAgent,
 		consts.ReqHost, data.ReqHost,
 		consts.ReqPath, data.ReqPath,
@@ -111,6 +111,6 @@ func HeadInMetadata(ctx context.Context, h headInfo.Head) context.Context {
 		IMEI:            h.IMEI,
 		ContentLanguage: h.ContentLanguage,
 		OriginHost:      h.OriginHost,
-		//TraceId:         headInfo.GetTrance(ctx),
+		// TraceId:         headInfo.GetTrance(ctx),
 	})
 }

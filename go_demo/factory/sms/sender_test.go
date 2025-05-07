@@ -1,8 +1,9 @@
 package sms
 
 import (
-	"go_demo/factory/sms/factories"
 	"testing"
+
+	"useDemo/go_demo/factory/sms/factories"
 )
 
 func TestSender(t *testing.T) {

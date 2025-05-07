@@ -5,7 +5,7 @@ import (
 	"github.com/segmentio/kafka-go"
 	"time"
 
-	"base-common/amqp/kafka/config"
+	"useDemo/base-common/amqp/kafka/config"
 )
 
 type Producer struct {
@@ -48,7 +48,7 @@ func (p *Producer) Close() error {
 	return p.Writer.Close()
 }
 func (p *Producer) BatchProduceMessage(messages []*KafkaMessage) error {
-	//for _, message := range messages {
+	// for _, message := range messages {
 	//	msg := kafka.Message{
 	//		Key:     message.Key,
 	//		Value:   message.Data,
@@ -58,8 +58,8 @@ func (p *Producer) BatchProduceMessage(messages []*KafkaMessage) error {
 	//	if err != nil {
 	//		return err
 	//	}
-	//}
-	//mr.MapReduceVoid[]()
+	// }
+	// mr.MapReduceVoid[]()
 
 	return nil
 }

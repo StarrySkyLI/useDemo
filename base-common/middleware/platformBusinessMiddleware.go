@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"time"
 
-	"base-common/consts"
-	"base-common/headInfo"
-	"base-common/pkg/xcode"
-	"base-common/result"
 	"github.com/patrickmn/go-cache"
 	"google.golang.org/grpc/metadata"
+	"useDemo/base-common/consts"
+	"useDemo/base-common/headInfo"
+	"useDemo/base-common/pkg/xcode"
+	"useDemo/base-common/result"
 )
 
 type GetPlatformBusinessFunc func(ctx context.Context, dns string) string
@@ -60,11 +60,11 @@ func MustGetPlatformBusinessCode(r *http.Request, getCodeF GetPlatformBusinessFu
 		var bCode string
 
 		bCode = consts.BusinessCodeDefaultValue
-		//if isDebug {
+		// if isDebug {
 		//	bCode = consts.BusinessCodeDefaultValue
-		//} else {
+		// } else {
 		//	bCode = getBusinessCodeByCache(dnsStr)
-		//}
+		// }
 
 		if bCode == "" && getCodeF != nil {
 			bCode = getCodeF(r.Context(), dnsStr)

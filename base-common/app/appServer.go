@@ -1,11 +1,11 @@
 package app
 
 import (
-	"base-common/app/dbM"
-	"base-common/pkg/logs"
-	"base-common/xxlJob"
 	"github.com/sirupsen/logrus"
 	"github.com/zeromicro/go-zero/core/logx"
+	"useDemo/base-common/app/dbM"
+	"useDemo/base-common/pkg/logs"
+	"useDemo/base-common/xxlJob"
 )
 
 func init() {

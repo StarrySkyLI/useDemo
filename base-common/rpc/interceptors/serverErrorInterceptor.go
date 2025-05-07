@@ -3,8 +3,8 @@ package interceptors
 import (
 	"context"
 
-	"base-common/xcode"
 	"google.golang.org/grpc"
+	"useDemo/base-common/xcode"
 )
 
 func ServerErrorInterceptor() grpc.UnaryServerInterceptor {

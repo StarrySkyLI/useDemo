@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 
-	kafkaMQ "base-common/amqp/kafka"
-	"base-common/amqp/kafka/config"
+	kafkaMQ "useDemo/base-common/amqp/kafka"
+	"useDemo/base-common/amqp/kafka/config"
 )
 
 const (

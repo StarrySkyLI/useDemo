@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"base-common/pkg/xcode"
+	"useDemo/base-common/pkg/xcode"
 
-	"base-common/rpc"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+	"useDemo/base-common/rpc"
 )
 
 type RpcAuthMiddleware struct {

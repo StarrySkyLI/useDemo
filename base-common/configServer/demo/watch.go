@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"base-common/configServer"
+	"useDemo/base-common/configServer"
 )
 
 func main() {

@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"base-common/headInfo"
 	"context"
+	"useDemo/base-common/headInfo"
 )
 
 func GetTokenUid(ctx context.Context) int64 {

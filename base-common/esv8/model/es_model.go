@@ -1,15 +1,15 @@
 package model
 
 import (
-	"base-common/esv8"
-	"base-common/esv8/core"
-	"base-common/uuid"
 	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
 	"strings"
+	"useDemo/base-common/esv8"
+	"useDemo/base-common/esv8/core"
+	"useDemo/base-common/uuid"
 )
 
 type EsModel struct {

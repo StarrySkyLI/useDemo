@@ -1,19 +1,19 @@
 package result
 
 import (
-	"base-common/arLanguage"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
 
-	"base-common/headInfo"
-	"base-common/pkg/aesGCM"
-	"base-common/pkg/xcode"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/trace"
 	"github.com/zeromicro/go-zero/rest/httpx"
+	"useDemo/base-common/arLanguage"
+	"useDemo/base-common/headInfo"
+	"useDemo/base-common/pkg/aesGCM"
+	"useDemo/base-common/pkg/xcode"
 )
 
 func HttpSuccessResult(ctx context.Context, w http.ResponseWriter, resp interface{}) {

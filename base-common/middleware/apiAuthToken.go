@@ -1,13 +1,14 @@
 package middleware
 
 import (
-	"base-common/consts"
-	"base-common/pkg/xcode"
 	"net/http"
 	"strconv"
 
-	"base-common/headInfo"
+	"useDemo/base-common/consts"
+	"useDemo/base-common/pkg/xcode"
+
 	"google.golang.org/grpc/metadata"
+	"useDemo/base-common/headInfo"
 )
 
 type CheckRequestTokenFunc func(r *http.Request, token string) int64

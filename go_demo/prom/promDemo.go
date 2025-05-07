@@ -5,30 +5,30 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"go_demo/prom/timeu"
 	"strconv"
 	"time"
+	"useDemo/go_demo/prom/timeu"
 )
 
 const serverNamespace = "http_server"
 
 var (
-	//metricServerReqDur = metric.NewHistogramVec(&metric.HistogramVecOpts{
+	// metricServerReqDur = metric.NewHistogramVec(&metric.HistogramVecOpts{
 	//	Namespace: serverNamespace,
 	//	Subsystem: "requests",
 	//	Name:      "duration_ms",
 	//	Help:      "http server requests duration(ms).",
 	//	Labels:    []string{"path", "method", "code"},
 	//	Buckets:   []float64{5, 10, 25, 50, 100, 250, 500, 750, 1000},
-	//})
+	// })
 	//
-	//metricServerReqCodeTotal = metric.NewCounterVec(&metric.CounterVecOpts{
+	// metricServerReqCodeTotal = metric.NewCounterVec(&metric.CounterVecOpts{
 	//	Namespace: serverNamespace,
 	//	Subsystem: "requests",
 	//	Name:      "code_total",
 	//	Help:      "http server requests error count.",
 	//	Labels:    []string{"path", "method", "code"},
-	//})
+	// })
 	vec = prometheus.NewHistogramVec(prometheus.HistogramOpts{
 		Namespace: serverNamespace,
 		Subsystem: "requests",

@@ -7,8 +7,8 @@ import (
 	"io"
 	"net/http"
 
-	"base-common/pkg/aesGCM"
-	"base-common/result"
+	"useDemo/base-common/pkg/aesGCM"
+	"useDemo/base-common/result"
 )
 
 const (

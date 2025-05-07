@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"base-common/pkg/cache"
 	"github.com/zeromicro/go-zero/core/logc"
 	"go.etcd.io/etcd/api/v3/mvccpb"
 	clientv3 "go.etcd.io/etcd/client/v3"
+	"useDemo/base-common/pkg/cache"
 )
 
 var once sync.Once

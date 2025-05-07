@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"base-common/consts"
-	"base-common/headInfo"
+	"useDemo/base-common/consts"
+	"useDemo/base-common/headInfo"
 )
 
 type OptionType string

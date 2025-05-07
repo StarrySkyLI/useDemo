@@ -1,13 +1,13 @@
 package headInfo
 
 import (
-	"base-common/consts"
 	"context"
 	"strconv"
 	"strings"
 
 	"go.opentelemetry.io/otel/trace"
 	"google.golang.org/grpc/metadata"
+	"useDemo/base-common/consts"
 )
 
 func GetTokenUid(ctx context.Context) int64 {

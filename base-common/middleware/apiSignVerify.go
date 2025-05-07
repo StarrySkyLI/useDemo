@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"base-common/pkg/signr"
-	"base-common/result"
+	"useDemo/base-common/pkg/signr"
+	"useDemo/base-common/result"
 )
 
 const (
@@ -65,14 +65,14 @@ func (m *SignVerifyMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 }
 
 func (m *SignVerifyMiddleware) checkReqTime(reqTimeStr string) error {
-	//reqTime, err := strconv.ParseInt(reqTimeStr, 10, 64)
-	//if err != nil {
+	// reqTime, err := strconv.ParseInt(reqTimeStr, 10, 64)
+	// if err != nil {
 	//	return SignTimeError
-	//}
-	//nowTime := time.Now()
-	//if reqTime > nowTime.UnixMilli() || reqTime < nowTime.Add(-m.OutTime).UnixMilli() {
+	// }
+	// nowTime := time.Now()
+	// if reqTime > nowTime.UnixMilli() || reqTime < nowTime.Add(-m.OutTime).UnixMilli() {
 	//	return SignTimeError
-	//}
+	// }
 
 	return nil
 }
@@ -80,7 +80,7 @@ func (m *SignVerifyMiddleware) verifyPath(urlPath string) bool {
 	if _, ok := m.noVerifyPath[urlPath]; ok {
 		return false
 	}
-	//todo 优化一下
+	// todo 优化一下
 	for path, _ := range m.noVerifyPath {
 		if strings.HasPrefix(path, "/") && strings.HasSuffix(path, "*") {
 			prefix := strings.TrimSuffix(path, "*")

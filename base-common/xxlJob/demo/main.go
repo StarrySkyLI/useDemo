@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"base-common/xxlJob"
 	"github.com/xxl-job/xxl-job-executor-go"
 	"github.com/xxl-job/xxl-job-executor-go/example/task"
+	"useDemo/base-common/xxlJob"
 )
 
 func main() {

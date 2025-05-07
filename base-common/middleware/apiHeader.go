@@ -1,14 +1,15 @@
 package middleware
 
 import (
-	"base-common/headInfo"
-	"base-common/result"
-	"base-common/rpc"
 	"errors"
-	"github.com/zeromicro/go-zero/core/logc"
 	"net/http"
 	"runtime/debug"
 	"strings"
+
+	"github.com/zeromicro/go-zero/core/logc"
+	"useDemo/base-common/headInfo"
+	"useDemo/base-common/result"
+	"useDemo/base-common/rpc"
 )
 
 type ApiHeadOption func(m *ApiHeaderMiddleware)
@@ -92,7 +93,7 @@ func (m *ApiHeaderMiddleware) verifyPath(urlPath string) bool {
 	if _, ok := m.noVerifyPath[urlPath]; ok {
 		return false
 	}
-	//todo 优化一下
+	// todo 优化一下
 	for path, _ := range m.noVerifyPath {
 		if strings.HasPrefix(path, "/") && strings.HasSuffix(path, "*") {
 			prefix := strings.TrimSuffix(path, "*")

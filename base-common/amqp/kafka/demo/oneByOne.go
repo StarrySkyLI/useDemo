@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	kafkaMQ "base-common/amqp/kafka"
-	"base-common/amqp/kafka/config"
+	kafkaMQ "useDemo/base-common/amqp/kafka"
+	"useDemo/base-common/amqp/kafka/config"
 )
 
 func main() {

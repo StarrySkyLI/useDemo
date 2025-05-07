@@ -1,8 +1,8 @@
 package serverMiddleware
 
 import (
-	"base-common/middleware"
 	"github.com/zeromicro/go-zero/rest"
+	"useDemo/base-common/middleware"
 )
 
 type SMOption func(s *ServerMiddleware)

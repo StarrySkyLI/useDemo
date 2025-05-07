@@ -1,9 +1,9 @@
 package test
 
 import (
-	"base-common/arLanguage"
 	"fmt"
 	"testing"
+	"useDemo/base-common/arLanguage"
 )
 
 func TestIsExist(t *testing.T) {
