@@ -1,0 +1,30 @@
+Name: rpc-demo
+ListenOn: 0.0.0.0:8080
+DB:
+  DataSource: "root:123456@tcp(10.100.139.149:3306)/demo?parseTime=true&loc=Local"
+  MaxIdleConns: 10
+  MaxOpenConns: 100
+  ConnMaxLifetime: 3600
+BizRedis:
+  Host: 10.108.80.34:6379
+  Pass:
+  Type: node
+Prometheus:
+  Host: 0.0.0.0
+  Port: 9102
+  Path: /metrics
+Consul:
+  Host: 127.0.0.1:8500
+  Key: rpc-demo
+  Meta:
+    env: test
+    service_group: demo
+    service_name: rpc-demo
+Telemetry:
+  Name: rpc-demo
+  Endpoint: http://127.0.0.1:14268/api/traces
+XxlJob:
+  Address: "https://xxl-job.xx.xx/xxl-job-admin"
+  AccessToken: "default_token"
+  ExecutorPort: "9999"
+  RegistryKey: "golang-jobs"

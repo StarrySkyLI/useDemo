@@ -11,8 +11,8 @@ import (
 func Handle() {
 	// 配置 MySQL 连接参数（替换为你的实际值）
 	user := "root"
-	password := "Newroot1515!"
-	host := "localhost" // Kubernetes 服务名或 ClusterIP
+	password := "123456"
+	host := "10.100.139.149" // Kubernetes 服务名或 ClusterIP
 	port := "3306"
 	dbName := "demo" // 要自动创建的数据库名
 

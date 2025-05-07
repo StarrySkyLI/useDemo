@@ -13,7 +13,7 @@ import (
 	"useDemo/base-common/consul"
 )
 
-var configFile = flag.String("f", "etc/api_demo-api.yaml", "the config file")
+var configFile = flag.String("f", "etc/api_demo.yaml", "the config file")
 
 func main() {
 	flag.Parse()

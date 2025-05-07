@@ -1,0 +1,20 @@
+Name: api-demo
+Host: 0.0.0.0
+Port: 8888
+RPC:
+  DemoRpc: k8s://use-demo/rpc-demo:8080
+Prometheus:
+  Host: 0.0.0.0
+  Port: 9101
+  Path: /metrics
+#  sum(rate(http_server_requests_duration_ms_count{env="$env",service_group="$service_group",service_name="$service_name"}[2m])) by (path)
+Telemetry:
+  Name: api-demo
+  Endpoint: http://127.0.0.1:14268/api/traces
+Consul:
+  Host: 127.0.0.1:8500
+  Key: api-demo
+  Meta:
+    env: test
+    service_group: demo
+    service_name: api-demo

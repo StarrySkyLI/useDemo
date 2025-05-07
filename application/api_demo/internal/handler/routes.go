@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	demo "api_demo/internal/handler/demo"
-	"api_demo/internal/svc"
+	"useDemo/application/api_demo/internal/handler/demo"
+	"useDemo/application/api_demo/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
