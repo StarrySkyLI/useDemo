@@ -19,3 +19,4 @@
 # for test purpose
 go.work
 go.work.sum
+*.tar
