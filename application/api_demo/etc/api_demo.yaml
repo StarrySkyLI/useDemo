@@ -1,8 +1,8 @@
 Name: api_demo-api
 Host: 0.0.0.0
-Port: 8888
-RPC:
-  DemoRpc: 127.0.0.1:8080
+Port: 80
+
+DemoRpc: 127.0.0.1:8080
 Prometheus:
   Host: 0.0.0.0
   Port: 9101

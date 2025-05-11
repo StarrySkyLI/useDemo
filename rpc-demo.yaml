@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rpc-demo
+  namespace: use-demo
+  labels:
+    app: rpc-demo
+spec:
+  replicas: 3
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: rpc-demo
+  template:
+    metadata:
+      labels:
+        app: rpc-demo
+    spec:
+      containers:
+        - name: rpc-demo
+          image: rpc-demo:v1.0.0
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          volumeMounts:
+            - name: timezone
+              mountPath: /etc/localtime
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rpc-demo
+  namespace: use-demo
+spec:
+  ports:
+    - port: 8080    # Service暴露的端口
+      targetPort: 8080  # 对应Pod的容器端口
+  selector:
+    app: rpc-demo   # 必须与rpc-demo Deployment的Pod标签匹配

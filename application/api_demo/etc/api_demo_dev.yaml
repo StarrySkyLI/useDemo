@@ -1,8 +1,10 @@
 Name: api-demo
 Host: 0.0.0.0
-Port: 8888
-RPC:
-  DemoRpc: k8s://use-demo/rpc-demo:8080
+Port: 80
+
+DemoRpc:
+  Target: k8s://use-demo/rpc-demo:8080
+  NonBlock: false
 Prometheus:
   Host: 0.0.0.0
   Port: 9101
