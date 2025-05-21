@@ -4,6 +4,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/zrpc"
 	"useDemo/base-common/consul"
+	"useDemo/base-common/minio_service"
 	"useDemo/base-common/xxlJob"
 )
 
@@ -15,7 +16,8 @@ type Config struct {
 		MaxIdleConns int `json:",default=100"`
 		MaxLifetime  int `json:",default=3600"`
 	}
-	XxlJob   xxlJob.Config
-	Consul   consul.Conf
-	BizRedis redis.RedisConf
+	MinioConf *minio_service.MinioConf
+	XxlJob    xxlJob.Config
+	Consul    consul.Conf
+	BizRedis  redis.RedisConf
 }

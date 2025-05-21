@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -36,14 +37,14 @@ type (
 	}
 )
 
+func NewGameModel(ctx context.Context, data *dao.Dao, log logx.Logger) IGameModel {
+	return &GameModel{ctx, data, log, &schema.Game{}}
+}
 func (model *GameModel) UpdateOne(info schema.Game) (err error) {
 	// TODO implement me
 	panic("implement me")
 }
 
-func NewGameModel(ctx context.Context, data *dao.Dao, log logx.Logger) IGameModel {
-	return &GameModel{ctx, data, log, &schema.Game{}}
-}
 func (model *GameModel) GetModel() *schema.Game {
 
 	return model.model
