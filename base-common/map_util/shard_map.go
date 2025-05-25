@@ -60,3 +60,44 @@ func fnv32(key string) uint32 {
 	h.Write([]byte(key))
 	return h.Sum32()
 }
+
+// 安全遍历所有键值对（仿 sync.Map 的 Range 设计）
+func (sm *ShardMap) Range(f func(key string, value any) error) error {
+	for _, shard := range sm.shards {
+		shard.RLock()
+		for k, v := range shard.m {
+			if err := f(k, v); err != nil {
+				shard.RUnlock()
+				return err // 遇到错误提前终止
+			}
+		}
+		shard.RUnlock()
+	}
+	return nil
+}
+
+// 获取所有键（线程安全）
+func (sm *ShardMap) Keys() []string {
+	keys := make([]string, 0)
+	for _, shard := range sm.shards {
+		shard.RLock()
+		for k := range shard.m {
+			keys = append(keys, k)
+		}
+		shard.RUnlock()
+	}
+	return keys
+}
+
+// 获取所有值（线程安全）
+func (sm *ShardMap) Values() []any {
+	values := make([]any, 0)
+	for _, shard := range sm.shards {
+		shard.RLock()
+		for _, v := range shard.m {
+			values = append(values, v)
+		}
+		shard.RUnlock()
+	}
+	return values
+}

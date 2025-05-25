@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	"useDemo/application/rpc_demo/internal/config"
-	"useDemo/application/rpc_demo/internal/dao/schema"
 	"useDemo/application/rpc_demo/internal/jobs/test"
 	file_server "useDemo/application/rpc_demo/internal/server/fileservice"
 	"useDemo/application/rpc_demo/internal/svc"
@@ -32,14 +31,23 @@ func main() {
 	flag.Parse()
 	app.InitAppServer()
 	// migrate.Handle()
+	// var c config.Config
+	// conf.MustLoad(*configFile, &c)
+	var nacosConf config.NacosConf
+	conf.MustLoad(*configFile, &nacosConf)
 	var c config.Config
-	conf.MustLoad(*configFile, &c)
+	nacosConf.LoadConfig(&c)
+
+	nacosConf.ListenConfig(func(namespace, group, dataId, data string) {
+		fmt.Printf("配置文件发生变化\n")
+		fmt.Printf("namespace: %s, group: %s, dataId: %s, data: %s", namespace, group, dataId, data)
+	})
 	snowflake.InitDefaultSnowflakeNode(1)
 	ctx := svc.NewServiceContext(c)
-	err := ctx.Dao.DB.AutoMigrate(&schema.Game{})
-	if err != nil {
-		panic(fmt.Sprintf("AutoMigrate failed: %v", err))
-	}
+	// err := ctx.Dao.DB.AutoMigrate(&schema.Game{})
+	// if err != nil {
+	// 	panic(fmt.Sprintf("AutoMigrate failed: %v", err))
+	// }
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		rpc.RegisterRpcDemoServer(grpcServer, rpc_demoServer.NewRpcDemoServer(ctx))
 		rpc.RegisterFileServiceServer(grpcServer, file_server.NewFileServiceServer(ctx))
@@ -56,7 +64,7 @@ func main() {
 	)
 	jobCli.MustStart()
 	// 服务注册
-	err = consul.Register(c.Consul, fmt.Sprintf("%s:%d", c.ServiceConf.Prometheus.Host, c.ServiceConf.Prometheus.Port))
+	err := consul.Register(c.Consul, fmt.Sprintf("%s:%d", c.ServiceConf.Prometheus.Host, c.ServiceConf.Prometheus.Port))
 	if err != nil {
 		fmt.Printf("register consul error: %v\n", err)
 	}

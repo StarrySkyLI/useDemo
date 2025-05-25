@@ -1,6 +1,8 @@
 package map_util
 
 import (
+	"errors"
+	"strconv"
 	"sync"
 	"testing"
 )
@@ -141,5 +143,154 @@ func TestFnv32_Consistency(t *testing.T) {
 		if got := fnv32(tt.input); got != tt.output {
 			t.Errorf("fnv32(%q) = 0x%x, want 0x%x", tt.input, got, tt.output)
 		}
+	}
+}
+
+func TestRange(t *testing.T) {
+	sm := NewShardMap()
+
+	// 填充测试数据
+	for i := 0; i < 1000; i++ {
+		sm.Store(strconv.Itoa(i), i)
+	}
+
+	t.Run("正常遍历", func(t *testing.T) {
+		count := 0
+		err := sm.Range(func(k string, v any) error {
+			count++
+			return nil
+		})
+		if err != nil || count != 1000 {
+			t.Fatalf("遍历失败，数量不符: %d, 错误: %v", count, err)
+		}
+	})
+
+	t.Run("中途终止", func(t *testing.T) {
+		stopErr := errors.New("stop")
+		count := 0
+		err := sm.Range(func(k string, v any) error {
+			count++
+			if count == 500 {
+				return stopErr
+			}
+			return nil
+		})
+		if err != stopErr || count != 500 {
+			t.Fatal("未正确终止遍历")
+		}
+	})
+
+	t.Run("并发安全", func(t *testing.T) {
+		var wg sync.WaitGroup
+		for i := 0; i < 100; i++ {
+			wg.Add(1)
+			go func(n int) {
+				defer wg.Done()
+				sm.Store("key"+strconv.Itoa(n), n)
+				sm.Range(func(k string, v any) error { return nil })
+			}(i)
+		}
+		wg.Wait()
+	})
+}
+
+func TestKeysValues(t *testing.T) {
+	sm := NewShardMap()
+
+	// 空map测试
+	if len(sm.Keys()) != 0 || len(sm.Values()) != 0 {
+		t.Fatal("空map返回非空结果")
+	}
+
+	// 填充测试数据
+	expected := make(map[string]int)
+	for i := 0; i < 1000; i++ {
+		key := strconv.Itoa(i)
+		sm.Store(key, i)
+		expected[key] = i
+	}
+
+	t.Run("Keys验证", func(t *testing.T) {
+		keys := sm.Keys()
+		if len(keys) != 1000 {
+			t.Fatal("键数量不符")
+		}
+		for _, k := range keys {
+			if _, ok := expected[k]; !ok {
+				t.Fatal("存在无效键")
+			}
+		}
+	})
+
+	t.Run("Values验证", func(t *testing.T) {
+		values := sm.Values()
+		if len(values) != 1000 {
+			t.Fatal("值数量不符")
+		}
+		valueMap := make(map[int]bool)
+		for _, v := range values {
+			valueMap[v.(int)] = true
+		}
+		for i := 0; i < 1000; i++ {
+			if !valueMap[i] {
+				t.Fatal("值缺失")
+			}
+		}
+	})
+}
+
+func BenchmarkRange(b *testing.B) {
+	sm := NewShardMap()
+	for i := 0; i < 100000; i++ {
+		sm.Store(strconv.Itoa(i), i)
+	}
+
+	b.Run("纯遍历", func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			sm.Range(func(k string, v any) error { return nil })
+		}
+	})
+
+	b.Run("并发读写", func(b *testing.B) {
+		var wg sync.WaitGroup
+		b.RunParallel(func(pb *testing.PB) {
+			wg.Add(1)
+			defer wg.Done()
+			counter := 0
+			for pb.Next() {
+				// 混合读写操作
+				key := strconv.Itoa(counter)
+				sm.Store(key, counter)
+				sm.Delete(key)
+				counter++
+				sm.Range(func(k string, v any) error { return nil })
+			}
+		})
+		wg.Wait()
+	})
+}
+
+func BenchmarkKeys(b *testing.B) {
+	sm := NewShardMap()
+	for i := 0; i < 100000; i++ {
+		sm.Store(strconv.Itoa(i), i)
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = sm.Keys()
+	}
+}
+
+func BenchmarkValues(b *testing.B) {
+	sm := NewShardMap()
+	for i := 0; i < 100000; i++ {
+		sm.Store(strconv.Itoa(i), i)
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = sm.Values()
 	}
 }
